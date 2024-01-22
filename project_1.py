@@ -22,14 +22,14 @@ data_fim_formatada = datetime.strptime(data_fim, '%d/%m/%Y').strftime('%d/%m/%Y'
 
 # Sua consulta SQL
 query = '''
-SELECT A.CD_ATENDIMENTO AS ATENDIMENTO,
-    to_char(A.HR_ATENDIMENTO , 'dd/mm/yyyy HH24:MI:SS' ) DATA_ATENDIMENTO,
-    Decode(A.tp_atendimento, 'I','INTERNAÇÃO', 'E', 'EXTERNO','U', 'URGÊNCIA', 'A', 'AMBULATORIO') AS TIPO_ATENDIMENTO,
-FROM ATENDIME A
-WHERE TRUNC(A.DT_ATENDIMENTO) BETWEEN 
+SELECT A.COD_ATEND AS ATENDIMENTO,
+    to_char(A.HR_ATEND , 'dd/mm/yyyy HH24:MI:SS' ) DATA_ATENDIMENTO,
+    Decode(A.TP_ATEND, 'I','INTERNAÇÃO', 'E', 'EXTERNO','U', 'URGÊNCIA', 'A', 'AMBULATORIO') AS TIPO_ATENDIMENTO,
+FROM atendimentos A
+WHERE TRUNC(A.DT_ATEND) BETWEEN 
 to_date(:data_inicio,'dd/mm/yyyy') AND 
 to_date(:data_fim,'dd/mm/yyyy')
-ORDER BY A.CD_ATENDIMENTO, A.HR_ATENDIMENTO
+ORDER BY 1,2
 '''
 
 parametros = {'data_inicio': data_inicio_formatada, 'data_fim': data_fim_formatada}
